@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0477DA782C22F51500AFE368 /* Codeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0477DA772C22F51400AFE368 /* Codeable.swift */; };
 		0477DA7A2C22FDF400AFE368 /* Expenses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0477DA792C22FDF400AFE368 /* Expenses.swift */; };
+		047F2E2C2C241F1B00D6B75A /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047F2E2B2C241F1B00D6B75A /* AddView.swift */; };
 		04E8E2662C20572800FF5E95 /* iExpenseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E8E2652C20572800FF5E95 /* iExpenseApp.swift */; };
 		04E8E2682C20572800FF5E95 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E8E2672C20572800FF5E95 /* ContentView.swift */; };
 		04E8E26A2C20572F00FF5E95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04E8E2692C20572F00FF5E95 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		0477DA772C22F51400AFE368 /* Codeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codeable.swift; sourceTree = "<group>"; };
 		0477DA792C22FDF400AFE368 /* Expenses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expenses.swift; sourceTree = "<group>"; };
+		047F2E2B2C241F1B00D6B75A /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		04E8E2622C20572800FF5E95 /* iExpense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iExpense.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04E8E2652C20572800FF5E95 /* iExpenseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iExpenseApp.swift; sourceTree = "<group>"; };
 		04E8E2672C20572800FF5E95 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				04E8E2772C209A0500FF5E95 /* SavePreference.swift */,
 				0477DA772C22F51400AFE368 /* Codeable.swift */,
 				0477DA792C22FDF400AFE368 /* Expenses.swift */,
+				047F2E2B2C241F1B00D6B75A /* AddView.swift */,
 				04E8E2692C20572F00FF5E95 /* Assets.xcassets */,
 				04E8E26B2C20572F00FF5E95 /* Preview Content */,
 			);
@@ -156,6 +159,7 @@
 				04E8E2782C209A0500FF5E95 /* SavePreference.swift in Sources */,
 				0477DA782C22F51500AFE368 /* Codeable.swift in Sources */,
 				04E8E2682C20572800FF5E95 /* ContentView.swift in Sources */,
+				047F2E2C2C241F1B00D6B75A /* AddView.swift in Sources */,
 				04E8E2762C20959000FF5E95 /* DeleteFile.swift in Sources */,
 				04E8E2662C20572800FF5E95 /* iExpenseApp.swift in Sources */,
 				0477DA7A2C22FDF400AFE368 /* Expenses.swift in Sources */,
