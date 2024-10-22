@@ -6,97 +6,72 @@
 //
 
 import SwiftUI
-
-struct ExpenseItems: Identifiable, Codable {
-    var id = UUID()
-    let name: String
-    let type: String
-    let amount: Double
-}
-
-@Observable
-class Expense {
-    var items = [ExpenseItems]() {
-        didSet {
-            if let encoded = try? JSONEncoder().encode(items) {
-                UserDefaults.standard.set(encoded, forKey: "Items")
-            }
-        }
-    }
-    
-    init() {
-        if let savedItems = UserDefaults.standard.data(forKey: "Items") {
-            if let decodedItems = try? JSONDecoder().decode(
-                [ExpenseItems].self,
-                from: savedItems
-            ) {
-                items = decodedItems
-                return
-            }
-        }
-        
-        items = []
-    }
-}
+import SwiftData
 
 struct ScaffoldView: View {
-    @State private var expenses = Expense()
     @State private var showingAddExpense = false
+    @State private var expenseType = "All"
     
-    func removeItem(at offsets: IndexSet) {
-        expenses.items.remove(atOffsets: offsets)
-    }
+    @State private var sortOrder = [
+        SortDescriptor(\ExpenseItem.name),
+        SortDescriptor(\ExpenseItem.amount, order: .reverse),
+    ]
     
-    private func color(for amount: Double) -> Color {
-           if amount < 10 {
-               return .green
-           } else if amount < 100 {
-               return .orange
-           } else {
-               return .red
-           }
-       }
-       
-       private func weight(for amount: Double) -> Font.Weight {
-           if amount < 10 {
-               return .regular
-           } else if amount < 100 {
-               return .medium
-           } else {
-               return .bold
-           }
-       }
-    
+
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(expenses.items) { item in
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(item.name)
-                                .font(.headline)
-                            
-                            Text(item.type)
+            ExpenseList(type: expenseType, sortOrder: sortOrder)
+                .navigationTitle("iExpense")
+                .toolbar {
+                    Menu("Filter", systemImage: "line.3.horizontal.decrease.circle") {
+                        Picker("Filter", selection: $expenseType) {
+                            Text("Show All Expenses")
+                                .tag("All")
+
+                            Divider()
+
+                            ForEach(AddView.types, id: \.self) { type in
+                                Text(type)
+                                    .tag(type)
+                            }
                         }
+                    }
                         
-                        Spacer()
-                        
-                        Text(item.amount, format: .currency(code: "NGN"))
-                            .foregroundStyle(color(for: item.amount))
-                            .fontWeight(weight(for: item.amount))
+                    Menu("Sort", systemImage: "arrow.up.arrow.down") {
+                        Picker("Sort", selection: $sortOrder) {
+                            Text("Name (A-Z)")
+                                .tag([
+                                    SortDescriptor(\ExpenseItem.name),
+                                    SortDescriptor(\ExpenseItem.amount)
+                                ])
+                            
+                            Text("Name (Z-A)")
+                                .tag([
+                                    SortDescriptor(\ExpenseItem.name, order: .reverse),
+                                    SortDescriptor(\ExpenseItem.amount)
+                                ])
+                            
+                            Text("Price (Cheapest First)")
+                                .tag([
+                                    SortDescriptor(\ExpenseItem.amount),
+                                    SortDescriptor(\ExpenseItem.name)
+                                ])
+
+                            Text("Price (Expensive First")
+                                .tag([
+                                    SortDescriptor(\ExpenseItem.amount, order: .reverse),
+                                    SortDescriptor(\ExpenseItem.name)
+                                ])
+                        }
+                    }
+                    
+                    Button("Add Expense", systemImage: "plus") {
+                        showingAddExpense = true
                     }
                 }
-                .onDelete(perform: removeItem)
-            }
-            .navigationTitle("iExpense")
-            .toolbar {
-                Button("Add Expense", systemImage: "plus") {
-                    showingAddExpense = true
+                .sheet(isPresented: $showingAddExpense) {
+                    AddView()
                 }
-            }
-            .sheet(isPresented: $showingAddExpense) {
-                AddView(expenses: expenses)
-            }
         }
     }
 }

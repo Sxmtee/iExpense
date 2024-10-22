@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct iExpenseApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ScaffoldView()
         }
+        .modelContainer(for: ExpenseItem.self)
     }
 }
